@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @SpringBootApplication
-@RestController
+// @RestController
 public class ScorpioApplication {
 
     // ────────────────────────────────────────────
@@ -111,23 +111,26 @@ public class ScorpioApplication {
         return data[n];
     }
     */
-    @RequestMapping("/")
-    public String index(
-            jakarta.servlet.http.HttpServletRequest request,
-            jakarta.servlet.http.HttpServletResponse response) {
-        response.setContentType(MediaType.TEXT_HTML_VALUE);
-        String content = """
-                <html>
-                    <head>
-                        <title>Sample App</title>
-                    </head>
-                    <body>
-                    <h1>Sample App</h1>
-                    <p>This is sample app page;</p>
-                </html>
-                """;
-        return content;
-    }
+    // ────────────────────────────────────────────
+    // HTML出力用
+    // ────────────────────────────────────────────
+    // @RequestMapping("/")
+    // public String index(
+    //         jakarta.servlet.http.HttpServletRequest request,
+    //         jakarta.servlet.http.HttpServletResponse response) {
+    //     response.setContentType(MediaType.TEXT_HTML_VALUE);
+    //     String content = """
+    //             <html>
+    //                 <head>
+    //                     <title>Sample App</title>
+    //                 </head>
+    //                 <body>
+    //                 <h1>Sample App</h1>
+    //                 <p>This is sample app page;</p>
+    //             </html>
+    //             """;
+    //     return content;
+    // }
 }
 
 /**
