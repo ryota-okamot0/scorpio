@@ -10,9 +10,18 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+import java.io.Writer;
+import com.samskivert.mustache.Mustache.Lambda;
+import com.samskivert.mustache.Template.Fragment;
+
 @Controller
 public class HelloController {
     private boolean flag = false;
+
+    // =============================================================
+    // Thymeleaf
+    // =============================================================
 
     // ────────────────────────────────────────────
     // テンプレートHTML表示（パラメータなし）
@@ -177,11 +186,111 @@ public class HelloController {
     // ────────────────────────────────────────────
     // テンプレートHTML表示（Switch）
     // ────────────────────────────────────────────
+/*
     @RequestMapping("/{month}")
     public ModelAndView index(@PathVariable int month, ModelAndView mav) {
         mav.setViewName("index");
         mav.addObject("msg", month + "月は？");
         mav.addObject("month", month);
         return mav;
+    }
+*/
+
+    // =============================================================
+    // Mustache
+    // =============================================================
+
+    // ────────────────────────────────────────────
+    // テンプレートHTML表示（パラメータ渡し）
+    // ────────────────────────────────────────────
+/*
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("index");
+        mav.addObject("msg", "メッセージだよ。");
+        return mav;
+    }
+*/
+    // ────────────────────────────────────────────
+    // テンプレートHTML表示（htmlタグ表示）
+    // ────────────────────────────────────────────
+/*
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("index");
+        String msg = """
+                <div class="border border-primary">
+                    <h2>Message</h2>
+                    <p>This is sample message!</p>
+                </div>
+                """;
+        mav.addObject("msg", msg);
+        return mav;
+    }
+*/
+    // ────────────────────────────────────────────
+    // テンプレートHTML表示（条件分岐）
+    // ────────────────────────────────────────────
+/*
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("index");
+        flag = !flag;
+        mav.addObject("flag", flag);
+        mav.addObject("msg", "メッセージを表示します。");
+        return mav;
+    }
+*/
+    // ────────────────────────────────────────────
+    // テンプレートHTML表示（ループ処理）
+    // ────────────────────────────────────────────
+/*
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("index");
+        MyData[] data = new MyData[] {
+            new MyData("Taro", 39),
+            new MyData("Hanako", 28),
+            new MyData("Sachiko", 17),
+        };
+        mav.addObject("data", data);
+        return mav;
+    }
+*/
+
+    // ────────────────────────────────────────────
+    // ラムダ式
+    // ────────────────────────────────────────────
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("index");
+        mav.addObject("title", "ラムダ式のサンプル");
+        mav.addObject("msg", "これはラムダ式を利用してメッセージを表示したものです。");
+
+        Lambda fn = new Lambda() {
+            public void execute (Fragment frag, Writer out) throws IOException {
+                out.write("<div class=\"alert alert-primary\">");
+                frag.execute(out);
+                out.write("</div>");
+            }
+        };
+        mav.addObject("fn", fn);
+        return mav;
+    }
+}
+/**
+ * MyData
+ */
+class MyData {
+    public String name;
+    public int age;
+
+    public MyData(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String toString() {
+        return String.format("{Name: %s, age: %d}", name, age);
     }
 }

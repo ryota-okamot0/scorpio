@@ -59,8 +59,9 @@ public class ScorpioApplication {
         // ────────────────────────────────────────────
         // 実行コマンド
         // ────────────────────────────────────────────
-        // cd cd .\build\libs
+        // cd D:\project\scorpio\
         // gradle build
+        // cd .\build\libs
         // java -jar scorpio-0.0.1-SNAPSHOT.jar --aaa=123 --zzz=456 abc xyz 99
 
         // SpringApplication app = new SpringApplication(ScorpioApplication.class);
