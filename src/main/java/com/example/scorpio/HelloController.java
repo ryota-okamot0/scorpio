@@ -261,6 +261,7 @@ public class HelloController {
     // ────────────────────────────────────────────
     // ラムダ式
     // ────────────────────────────────────────────
+/*
     @RequestMapping("/")
     public ModelAndView index(ModelAndView mav) {
         mav.setViewName("index");
@@ -277,7 +278,52 @@ public class HelloController {
         mav.addObject("fn", fn);
         return mav;
     }
+*/
+
+    // ────────────────────────────────────────────
+    // Groovy
+    // ────────────────────────────────────────────
+/*
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("index");
+        mav.addObject("title", "Groovy templates");
+        mav.addObject("msg", "This is sample message!!");
+        return mav;
+    }
+*/
+
+    // ────────────────────────────────────────────
+    // Groovy 条件分岐
+    // ────────────────────────────────────────────
+/*
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        flag = !flag;
+        mav.setViewName("index");
+        mav.addObject("title", "Groovy templates");
+        mav.addObject("msg", "This is sample message!!");
+        mav.addObject("flag", flag);
+        return mav;
+    }
+*/
+
+    // ────────────────────────────────────────────
+    // Groovy 繰り返し
+    // ────────────────────────────────────────────
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+    String[] data = {"Windows", "macOS", "Linux", "ChromeOS"};
+        mav.setViewName("index");
+        mav.addObject("title", "Groovy templates");
+        mav.addObject("msg", "レイアウト機能を使ったサンプルです。");
+        // mav.addObject("msg", "This is include content sample.");
+        // mav.addObject("msg", "This is sample message!!");
+        // mav.addObject("data", data);
+        return mav;
+    }
 }
+
 /**
  * MyData
  */
