@@ -1,5 +1,6 @@
 package com.example.scorpio;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 // import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,16 @@ import java.io.IOException;
 import java.io.Writer;
 import com.samskivert.mustache.Mustache.Lambda;
 import com.samskivert.mustache.Template.Fragment;
+import com.example.scorpio.entity.Person;
 
+import com.example.scorpio.repositories.PersonRepository;
 @Controller
 public class HelloController {
     private boolean flag = false;
+
+
+    @Autowired
+    PersonRepository repository;
 
     // =============================================================
     // Thymeleaf
@@ -311,6 +318,7 @@ public class HelloController {
     // ────────────────────────────────────────────
     // Groovy 繰り返し
     // ────────────────────────────────────────────
+/*
     @RequestMapping("/")
     public ModelAndView index(ModelAndView mav) {
     String[] data = {"Windows", "macOS", "Linux", "ChromeOS"};
@@ -320,6 +328,16 @@ public class HelloController {
         // mav.addObject("msg", "This is include content sample.");
         // mav.addObject("msg", "This is sample message!!");
         // mav.addObject("data", data);
+        return mav;
+    }
+*/
+    @RequestMapping("/")
+    public ModelAndView index(ModelAndView mav) {
+        mav.setViewName("index");
+        mav.addObject("title", "Hello page");
+        mav.addObject("msg", "this is JPA sample data.");
+        Iterable<Person> list = repository.findAll();
+        mav.addObject("data", list);
         return mav;
     }
 }

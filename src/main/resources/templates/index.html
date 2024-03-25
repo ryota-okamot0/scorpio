@@ -23,12 +23,18 @@
           {{/data}}
         </ul>
       </body> -->
-    <body class="container">
+    <!-- <body class="container">
         <h1 class="display-4 mb-4">Hello page</h1>
         {{#fn}}
         <h6>{{title}}</h6>
         <p>{{msg}}</p>
         {{/fn}}
+    </body> -->
+
+    <body class="container">
+      <h1 class="display-4 mb-4" th:text="${title}"></h1>
+      <p th:text="${msg}"></p>
+      <pre th:text="${data}"></pre>
     </body>
     
 </html>
